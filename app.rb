@@ -1,6 +1,6 @@
 require('sinatra')
 require('sinatra/reloader')
-require('./lib/RPS')
+require('./lib/find')
 also_reload('lib/**/*.rb')
 
 
@@ -8,9 +8,10 @@ get('/') do
   erb(:index)
 end
 
-get('/RPSform') do
-  @Player1 = params.fetch('player1')
-  @Player2 = params.fetch('player2')
-  @Winner = @Player1.beats?(@Player2)
-  erb(:RPS_win)
+get('/replace_form') do
+  @Sentence = params.fetch('sentence')
+  @OldWord = params.fetch('oldword')
+  @NewWord = params.fetch('newword')
+  @Substitute = @Sentence.finder(@OldWord, @NewWord)
+  erb(:final)
 end

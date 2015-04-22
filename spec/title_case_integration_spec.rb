@@ -2,13 +2,13 @@ require('capybara/rspec')
 require('./app')
 Capybara.app = Sinatra::Application
 
-describe('the RPS path', {:type => :feature}) do
-  it('plays rock paper scissors') do
+describe('the sentencer', {:type => :feature}) do
+  it('finds and replaces words in a sentence') do
     visit('/')
-    fill_in('player1', :with => 'rock')
-    fill_in('player2', :with => 'scissors')
+    fill_in('sentence', :with => 'the carpet is driving the car')
+    fill_in('oldword', :with => 'car')
+    fill_in('newword', :with => 'monster')
     click_button('Send')
-    expect(page).to have_content('Player 1 wins!')
+    expect(page).to have_content('the monsterpet is driving the monster')
   end
-
 end
